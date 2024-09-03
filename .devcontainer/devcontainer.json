@@ -13,13 +13,12 @@
     "ghcr.io/rails/devcontainer/features/postgres-client": {},
     "ghcr.io/jungaretti/features/vim": {},
     "ghcr.io/devcontainers/features/common-utils:latest": {
-      "installOhMyZsh": false, // For more defailts: https://github.com/devcontainers/features/issues/1035.
+      "installOhMyZsh": false,
       "installOhMyZshConfig": false,
       "configureZshAsDefaultShell": true
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // This can be used to network with other containers or the host.
   "forwardPorts": [
     3000,
     5432,
@@ -33,72 +32,42 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "workbench": {
-          "iconTheme": "vscode-icons"
+        "workbench.iconTheme": "vscode-icons",
+        "editor.formatOnSave": true,
+        "editor.quickSuggestions": {
+          "strings": "on"
         },
-        "editor": {
-          "formatOnSave": true,
-          "quickSuggestions": {
-            "strings": "on"
-          }
-        },
-        "files": {
-          "associations": {
-            "*.css": "tailwindcss"
-          }
+        "files.associations": {
+          "*.css": "tailwindcss"
         },
         "[ruby]": {
-          "editor": {
-            "defaultFormatter": "Shopify.ruby-lsp",
-            "formatOnSave": true,
-            "tabSize": 2,
-            "insertSpaces": true,
-            "semanticHighlighting.enabled": true,
-            "formatOnType": true
-          }
+          "editor.defaultFormatter": "Shopify.ruby-lsp",
+          "editor.formatOnSave": true,
+          "editor.tabSize": 2,
+          "editor.insertSpaces": true,
+          "editor.semanticHighlighting.enabled": true,
+          "editor.formatOnType": true
         },
         "[erb]": {
-          "editor": {
-            "formatOnSave": false
-          }
+          "editor.formatOnSave": false
         },
-        "rubyLsp": {
-          "rubyVersionManager": "rbenv",
-          "formatter": "rubocop"
+        "rubyLsp.rubyVersionManager": "rbenv",
+        "rubyLsp.formatter": "rubocop",
+        "railsI18n.localeFilePattern": "config/locales/**/*.yml",
+        "railsI18n.priorityOfLocales": [
+          "ar"
+        ],
+        "tailwindCSS.includeLanguages": {
+          "plaintext": "html"
         },
-        "railsI18n": {
-          "localeFilePattern": "config/locales/**/*.yml",
-          "priorityOfLocales": [
-            "ar"
-          ]
-        },
-        "tailwindCSS": {
-          "includeLanguages": {
-            "plaintext": "html"
-          }
-        },
-        "erb-formatter": {
-          "lineLength": 240,
-          "commandPath": "/home/vscode/.rbenv/versions/3.3.4/bin/erb-formatter"
-        },
-        "erb": {
-          "erb-lint": {
-            "onSave": false
-          }
-        },
+        "erb-formatter.lineLength": 240,
+        "erb-formatter.commandPath": "/home/vscode/.rbenv/versions/3.3.4/bin/erb-formatter",
+        "erb.erb-lint.onSave": false,
         "emeraldwalk.runonsave": {
           "commands": [
             {
               "match": "(?<!\\.json)\\.erb$",
-              "cmd": "tempfile=$(mktemp);\
-                      cat ${file} > $tempfile;\
-                      rustywind --write $tempfile;\
-                      rustywind --write --custom-regex \"class=\\\"([^\\\"]+)\\\"\" $tempfile;\
-                      rustywind --write --custom-regex \"class:\\s+\\\"([^\\\"]+)\\\"\" $tempfile;\
-                      rustywind --write --custom-regex \"class:\\s+\\'([^\\']+)\\'\" $tempfile;\
-                      erb-formatter --write --print-width 240 $tempfile;\
-                      erblint --autocorrect $tempfile;\
-                      mv $tempfile ${file};"
+              "cmd": "tempfile=$(mktemp); cat ${file} > $tempfile; rustywind --write $tempfile; rustywind --write --custom-regex \"class=\\\"([^\\\"]+)\\\"\" $tempfile; rustywind --write --custom-regex \"class:\\s+\\\"([^\\\"]+)\\\"\" $tempfile; rustywind --write --custom-regex \"class:\\s+\\'([^\\']+)\\'\" $tempfile; erb-formatter --write --print-width 240 $tempfile; erblint --autocorrect $tempfile; mv $tempfile ${file};"
             },
             {
               "match": ".*locales.*\\.yml$",
@@ -110,9 +79,7 @@
             }
           ]
         },
-        "livePreview": {
-          "portNumber": 9620
-        },
+        "livePreview.portNumber": 9620,
         "sqltools.connections": [
           {
             "name": "Rails Development Database",
@@ -120,7 +87,6 @@
             "previewLimit": 50,
             "server": "db",
             "port": 5432,
-            // update this to match config/database.yml
             "database": "ruby_on_rails_development",
             "username": "postgres",
             "password": "postgres"
@@ -131,7 +97,6 @@
             "previewLimit": 50,
             "server": "db",
             "port": 5432,
-            // update this to match config/database.yml
             "database": "ruby_on_rails_test",
             "username": "postgres",
             "password": "postgres"
